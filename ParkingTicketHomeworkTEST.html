@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Write those tickets!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style type="text/css">
+        .Pticket-image {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tickets that need to be wrote: <span id="tickets-to-write"></span></h1>
+    <div id="Tickets">
+
+    </div>
+
+    <div class="wins">
+        <p>Wins:</p>
+    </div>
+    <div class="losses">
+        <p>Losses:</p>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var max = 120;
+        var min = 19;
+
+        var Ticketwritenumber = [Math.floor(Math.random() * (max - min + 1) + min)];
+
+        $("#tickets-to-write").text(Ticketwritenumber);
+
+        var counter = 0;
+
+
+        var first = Math.floor(Math.random() * 12);
+        var second = Math.floor(Math.random() * 12);
+        var third = Math.floor(Math.random() * 12);
+        var forth = Math.floor(Math.random() * 12);
+
+        var numberOptions = [first, second, third, forth];
+
+        console.log(first)
+        console.log(second)
+        console.log(third)
+        console.log(forth)
+
+        for (var i = 0; i < numberOptions.length; i++) {
+
+            var Paticketimage = $("<img>");
+
+            Paticketimage.addClass("Pticket-image");
+
+            Paticketimage.attr("src", "https://i-cdn.phonearena.com/images/article/53259-image/Parking-ticket-troubles--Theres-an-app-for-that.jpg");
+
+            Paticketimage.attr("data-tickets", numberOptions[i]);
+
+            $("#Tickets").append(Paticketimage);
+        }
+
+        var wins = 0;
+        var losses = 0;
+
+        alert("It seems like people are parking next to the Bootcamp building and they arent paying for parking....");
+        alert("Im going to need you to go out there and write tickets but dont write too many or they will park somewhere else...")
+
+
+
+        $(".Pticket-image").on("click", function () {
+
+            var ticketValue = ($(this).attr("data-tickets"));
+            ticketValue = parseInt(ticketValue);
+
+            counter += ticketValue;
+
+            alert("Great job writing that ticket! " + counter + " tickets wrote");
+
+            if (counter === Ticketwritenumber) {
+                alert("The Boss is happy!");
+                wins++;
+                counter = 0;
+            }
+
+            else if (counter >= Ticketwritenumber) {
+                alert("You have scared our customers away and upset the Boss. You are Fired!");
+                losses++;
+                counter = 0;
+            }
+
+            $(".losses").text("Losses: " + losses);
+            $(".wins").text("Wins: " + wins);
+        });
+
+
+    </script>
+</body>
+
+</html>
